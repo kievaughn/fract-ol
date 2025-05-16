@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:55:43 by dimendon          #+#    #+#             */
-/*   Updated: 2025/04/12 17:43:12 by dimendon         ###   ########.fr       */
+/*   Created: 2025/05/16 15:10:06 by kbrandon          #+#    #+#             */
+/*   Updated: 2025/05/16 15:10:09 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,4 @@ void	data_init(t_fractal *fractal)
 	fractal->shift_x = 0.0;
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
-	fractal->needs_render = 0;
 }

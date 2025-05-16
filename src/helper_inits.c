@@ -3,25 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   helper_inits.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:55:34 by dimendon          #+#    #+#             */
-/*   Updated: 2025/04/12 17:43:44 by dimendon         ###   ########.fr       */
+/*   Created: 2025/05/16 15:09:44 by kbrandon          #+#    #+#             */
+/*   Updated: 2025/05/16 15:10:29 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "libft/libft.h"
-
-int	render_if_needed(t_fractal *fractal)
-{
-	if (fractal->needs_render)
-	{
-		fractal_render(fractal);
-		fractal->needs_render = 0;
-	}
-	return (0);
-}
 
 int	close_handler(t_fractal *fractal)
 {
@@ -78,7 +68,4 @@ void	events_init(t_fractal *fractal)
 		fractal);
 	mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask,
 		close_handler, fractal);
-	mlx_hook(fractal->mlx_window, MotionNotify, PointerMotionMask, julia_track,
-		fractal);
-	mlx_loop_hook(fractal->mlx_connection, render_if_needed, fractal);
 }

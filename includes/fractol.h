@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:55:15 by dimendon          #+#    #+#             */
-/*   Updated: 2025/04/12 17:44:26 by dimendon         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:03:04 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_fractal
 	double	zoom;
 	double	julia_x;
 	double	julia_y;
-	int		needs_render;
 }			t_fractal;
 
 double		atodbl(char *s);
@@ -82,7 +81,7 @@ t_complex	square_complex(t_complex z);
 int			key_handler(int keysym, t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
-int			julia_track(int x, int y, t_fractal *fractal);
+//int			julia_track(int x, int y, t_fractal *fractal);
 void		events_init(t_fractal *fractal);
 void		data_init(t_fractal *fractal);
 void		which_fractal(t_complex *z, t_complex *c, t_fractal *fractal);

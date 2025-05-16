@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcs.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:55:29 by dimendon          #+#    #+#             */
-/*   Updated: 2025/04/12 17:42:12 by dimendon         ###   ########.fr       */
+/*   Created: 2025/05/16 15:10:21 by kbrandon          #+#    #+#             */
+/*   Updated: 2025/05/16 15:10:24 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,4 @@ inline	t_complex	square_complex(t_complex z)
 	result.x = (z.x * z.x) - (z.y * z.y);
 	result.y = 2 * z.x * z.y;
 	return (result);
-}
-
-inline	int	julia_track(int x, int y, t_fractal *fractal)
-{
-	if (!ft_strncmp(fractal->name, "julia", 5))
-	{
-		fractal->julia_x = (map(x, -2, +2, 0) * fractal->zoom)
-			+ fractal->shift_x;
-		fractal->julia_y = (map(y, +2, -2, 0) * fractal->zoom)
-			+ fractal->shift_y;
-		fractal->needs_render = 1;
-	}
-	return (0);
 }

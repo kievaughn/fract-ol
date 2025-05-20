@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 15:32:50 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/13 18:33:13 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/14 17:18:20 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/14 17:26:15 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,11 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*temp;
 
-	if (lst == NULL || del == NULL)
-		return ;
-	while (*lst != NULL)
+	while (*lst)
 	{
-		temp = *lst;
-		*lst = (*lst)->next;
-		del(temp->content);
-		free(temp);
+		temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = temp;
 	}
-}
-
-void	del(void *content)
-{
-	if (content)
-		free(content);
+	*lst = NULL;
 }

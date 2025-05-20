@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 12:16:24 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/13 18:33:09 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/14 14:35:08 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/14 14:54:17 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	count;
+	int	i;
 
-	count = 0;
+	i = 0;
 	while (lst != NULL)
 	{
 		lst = lst->next;
-		count++;
+		i++;
 	}
-	return (count);
+	return (i);
 }

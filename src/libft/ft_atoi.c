@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:55:01 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/11 16:55:10 by dimendon         ###   ########.fr       */
+/*   Created: 2024/08/12 18:44:03 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 18:54:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 int	ft_atoi(const char *str)
 {
-	int	ret;
-	int	sign;
 	int	i;
+	int	mult;
+	int	nbr;
 
 	i = 0;
-	ret = 0;
-	sign = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	mult = 1;
+	nbr = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 	{
-		if (str[i] == '-')
-			sign = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	if (str[i] == 45 || str[i] == 43)
 	{
-		ret = (ret * 10) + str[i] - '0';
+		if (str[i + 1] < '0' || str[i + 1] > '9')
+			return (0);
+		if (str[i] == 45)
+			mult *= -1;
 		i++;
 	}
-	return (ret * sign);
+	while ((str[i] >= '0') && (str[i] <= '9'))
+	{
+		nbr = (nbr * 10) + ((str[i++]) - '0');
+	}
+	nbr *= mult;
+	return (nbr);
 }

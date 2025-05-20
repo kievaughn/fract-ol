@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:54:53 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/15 13:55:21 by dimendon         ###   ########.fr       */
+/*   Created: 2024/08/07 17:14:13 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 18:54:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int letter)
+int	ft_isalpha(int c)
 {
-	if (((letter < 65 || letter > 90) && (letter < 97 || letter > 122)))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	{
+		return (1);
+	}
+	else
 		return (0);
-	return (1);
 }

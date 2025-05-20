@@ -3,77 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:54:45 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/12 14:50:47 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/12 14:32:33 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/13 12:48:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	getsize(int n)
+static int	get_digits(int n)
 {
-	unsigned int	size;
+	int	digits;
 
-	size = 0;
+	digits = 0;
 	while (n != 0)
 	{
 		n = n / 10;
-		size++;
+		digits++;
 	}
-	return (size);
+	return (digits);
 }
 
-static void	passtostring(unsigned int size, unsigned int n, char *s,
-		short int isnegative)
+static char	*neg(int n)
 {
-	if (isnegative == 1)
+	char	*str;
+	int		i;
+
+	i = get_digits(n);
+	str = ft_calloc((i + 2), 1);
+	if (!str)
+		return (NULL);
+	n *= -1;
+	while (n != 0)
 	{
-		n = n * -1;
-		s[0] = '-';
-		while (size > 1)
-		{
-			s[size - 1] = (n % 10) + '0';
-			n = n / 10;
-			size--;
-		}
+		str[i] = (n % 10) + '0';
+		n = n / 10;
+		i--;
 	}
-	else
+	str[0] = '-';
+	return (str);
+}
+
+static char	*pos(int n)
+{
+	char	*str;
+	int		i;
+
+	i = get_digits(n) - 1;
+	str = ft_calloc((i + 2), 1);
+	if (!str)
+		return (NULL);
+	while (n != 0)
 	{
-		while (size > 0)
-		{
-			s[size - 1] = (n % 10) + '0';
-			n = n / 10;
-			size--;
-		}
+		str[i] = (n % 10) + '0';
+		n = n / 10;
+		i--;
 	}
+	return (str);
 }
 
 char	*ft_itoa(int n)
 {
-	char			*ret;
-	unsigned int	size;
+	char	*str;
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	else if (n < 0)
-	{
-		size = getsize(n * -1) + 1;
-		ret = ft_calloc(size + 1, 1);
-		if (!ret)
-			return (NULL);
-		passtostring(size, n, ret, 1);
-	}
-	else if (n > 0)
-	{
-		size = getsize(n);
-		ret = ft_calloc(size + 1, 1);
-		if (!ret)
-			return (NULL);
-		passtostring(size, n, ret, 0);
-	}
-	else
-		return (NULL);
-	return (ret);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (n >= 0)
+		str = pos(n);
+	if (n < 0)
+		str = neg(n);
+	return (str);
 }

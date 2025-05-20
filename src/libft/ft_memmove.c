@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:54:36 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/12 14:42:20 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/01 10:43:40 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 18:54:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	passvalues(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
-	size_t				i;
+	unsigned char	*d;
+	unsigned char	*s;
+	size_t			i;
 
-	i = 0;
 	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (d < s)
+	s = (unsigned char *)src;
+	i = 0;
+	if ((d < s) || (s + n <= d))
 	{
 		while (i < n)
 		{
@@ -31,19 +31,11 @@ void	passvalues(void *dest, const void *src, size_t n)
 	}
 	else
 	{
-		i = n;
-		while (i > 0)
+		while (n > 0)
 		{
-			d[i - 1] = s[i - 1];
-			i--;
+			n--;
+			d[n] = s[n];
 		}
 	}
-}
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	if (!dest && !src)
-		return (NULL);
-	passvalues(dest, src, n);
-	return (dest);
+	return (d);
 }

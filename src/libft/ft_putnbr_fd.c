@@ -3,66 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 13:03:48 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/12 18:36:34 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/12 19:13:30 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 19:15:31 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_printbackwards(char *converted, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
+	char	str[11];
+	int		i;
 
 	i = 0;
-	while (*converted != '\0')
+	if (n == 0)
+		write(fd, "0", 1);
+	else if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else if (n < 0)
 	{
-		i++;
-		converted++;
+		write(fd, "-", 1);
+		n = (n * -1);
 	}
-	while (i > 0)
+	while (n > 0)
 	{
-		converted--;
-		write(fd, &*converted, 1);
-		i--;
-	}
-}
-
-static void	assignvalues(char *s, int n)
-{
-	int	i;
-
-	i = 0;
-	while (n != 0)
-	{
-		s[i] = (n % 10) + 48;
+		str[i] = (n % 10) + '0';
 		n = n / 10;
 		i++;
 	}
-	s[i] = '\0';
-}
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	char	nbtoch[11];
-
-	if (n == -2147483648)
+	i--;
+	while (i >= 0)
 	{
-		write(fd, "-2147483648", 11);
-		return ;
+		write(fd, &str[i], 1);
+		i--;
 	}
-	else if (n < 0)
-	{
-		n = n * (-1);
-		write(fd, "-", 1);
-	}
-	else if (n == 0)
-	{
-		write(fd, "0", 1);
-		return ;
-	}
-	assignvalues(nbtoch, n);
-	ft_printbackwards(nbtoch, fd);
 }

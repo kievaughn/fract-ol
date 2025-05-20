@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 15:00:32 by kbrandon          #+#    #+#             */
-/*   Updated: 2024/11/14 15:05:50 by kbrandon         ###   ########.fr       */
+/*   Created: 2024/11/12 19:13:32 by kbrandon          #+#    #+#             */
+/*   Updated: 2025/01/17 18:26:30 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_putstr(char *s)
 {
-	while (lst)
+	int				count;
+	int				result;
+
+	count = 0;
+	result = 0;
+	if (!s)
+		s = "(null)";
+	while (*s)
 	{
-		if (lst->next == NULL)
-			return (lst);
-		else
-			lst = lst->next;
+		result = write(1, s, 1);
+		if (result < 0)
+			return (-1);
+		count += result;
+		s++;
 	}
-	return (lst);
+	return (count);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 15:19:03 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/11 16:55:58 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/04 14:16:06 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 18:54:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,29 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*substr;
-	unsigned int	size;
-	size_t			remain;
-	size_t			i;
+	char	*string;
+	size_t	i;
+	size_t	src_len;
 
-	if (!s)
-		return (NULL);
-	size = ft_strlen(s);
-	if (start >= size)
+	i = 0;
+	src_len = ft_strlen((char *)s);
+	if (start > src_len)
 		return (ft_strdup(""));
-	else
+	if (start == src_len)
 	{
-		remain = size - start;
-		if (remain > len)
-			remain = len;
-		substr = malloc(remain + 1);
-		if (substr == NULL)
+		string = (char *)malloc(1);
+		if (string == NULL)
 			return (NULL);
-		i = 0;
-		while (i < remain)
-			substr[i++] = s[start++];
-		substr[i] = '\0';
+		string[0] = '\0';
+		return (string);
 	}
-	return (substr);
+	if (len > src_len - start)
+		len = src_len - start;
+	string = (char *)malloc((len + 1) * sizeof(char));
+	if (string == NULL)
+		return (NULL);
+	while (i < len)
+		string[i++] = s[start++];
+	string[i] = '\0';
+	return (string);
 }

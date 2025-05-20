@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:47:44 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/11 16:55:54 by dimendon         ###   ########.fr       */
+/*   Created: 2024/10/29 12:44:10 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 18:54:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *input, int findascii)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	size;
+	const char	*last_occurrence = NULL;
 
-	size = 0;
-	while (input[size])
-		size++;
-	findascii %= 256;
-	while (size >= 0)
+	while (*s != '\0')
 	{
-		if (input[size] == findascii)
-			return ((char *)(input + size));
-		size--;
+		if (*s == (char)c)
+			last_occurrence = s;
+		s++;
 	}
-	return (NULL);
+	if (c == '\0')
+		return ((char *)s);
+	return ((char *)last_occurrence);
 }

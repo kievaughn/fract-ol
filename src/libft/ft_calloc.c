@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:54:57 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/11 16:55:13 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/01 15:25:50 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/13 12:32:05 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t num, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	totalsize;
-	char	*p;
+	void	*ptr;
+	size_t	total_size;
 
-	totalsize = num * size;
-	if (num != 0 && totalsize / num != size)
+	if (nmemb == 0 || size == 0)
+		return (ft_strdup(""));
+	total_size = nmemb * size;
+	if (total_size / size != nmemb)
 		return (NULL);
-	p = malloc(num * size);
-	if (p == NULL)
+	ptr = (unsigned char *)malloc(nmemb * size);
+	if (ptr == NULL)
 		return (NULL);
-	ft_bzero(p, num * size);
-	return (p);
+	ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }

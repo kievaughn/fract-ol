@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:47:49 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/12 14:18:49 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/01 13:45:23 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 18:54:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,23 @@
 
 char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
-	char	*ret;
 	size_t	i;
-	size_t	size_tf;
+	size_t	j;
 
-	if (!str && len == 0)
-		return (NULL);
-	if (*to_find == '\0')
+	i = 0;
+	j = 0;
+	if (to_find[0] == '\0')
 		return ((char *)str);
-	size_tf = 0;
-	while (to_find[size_tf] != '\0')
-		size_tf++;
-	while (*str != '\0' && len >= size_tf)
+	while ((str[i] != '\0') && (i < len))
 	{
-		ret = (char *)str;
-		i = 0;
-		while (str[i] == to_find[i])
+		j = 0;
+		while ((str[i + j] == to_find[j]) && (i + j < len))
 		{
-			i++;
-			if (i == size_tf)
-				return (ret);
+			j++;
+			if (to_find[j] == '\0')
+				return ((char *)&str[i]);
 		}
-		str++;
-		len--;
+		i++;
 	}
 	return (NULL);
 }

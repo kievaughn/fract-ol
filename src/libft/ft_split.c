@@ -3,92 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:54:33 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/13 17:18:45 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/11 12:16:21 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 18:54:40 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	skipc(const char *input, const char c, size_t pos)
+static size_t	word_count(char const *s, char c)
 {
-	while (input[pos] == c)
-		pos++;
-	return (pos);
+	size_t	i;
+	size_t	wrd_ct;
+	size_t	ct_flag;
+
+	i = 0;
+	wrd_ct = 0;
+	ct_flag = 0;
+	while (s[i])
+	{
+		if (s[i] != c && ct_flag == 0)
+		{
+			wrd_ct++;
+			ct_flag = 1;
+		}
+		else if (s[i] == c)
+			ct_flag = 0;
+		i++;
+	}
+	return (wrd_ct);
 }
 
-static size_t	ft_substrlen(const char *input, const char c, unsigned int pos,
-		unsigned int lastchar)
+static size_t	next_c(char *s, char c)
 {
 	size_t	len;
 
 	len = 0;
-	while (input[pos] == c && pos < lastchar)
-		pos++;
-	while (input[pos] != c && pos < lastchar)
-	{
+	while (s[len] && s[len] != c)
 		len++;
-		pos++;
-	}
 	return (len);
 }
 
-static unsigned int	countwords(const char *s, const char c,
-		unsigned int lastchar)
+static void	free_arr(char **arr, int i)
 {
-	unsigned int	i;
-	unsigned int	words;
+	while (i-- > 0)
+		free(arr[i]);
+	free(arr);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**arr;
+	int		i;
+	size_t	len;
 
 	i = 0;
-	words = 0;
-	while (s[i])
+	len = 0;
+	arr = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
+	if (!s || !arr)
+		return (NULL);
+	while (*s)
 	{
-		while (s[i] == c && i < lastchar)
-			i++;
-		if (s[i] != c && i < lastchar)
+		while (*s == c)
+			s++;
+		if (*s)
 		{
-			words++;
-			while (s[i] != c && i < lastchar)
-				i++;
+			len = next_c((char *)s, c);
+			arr[i] = ft_substr((char *)s, 0, len);
+			if (!arr[i])
+				return (free_arr(arr, i), NULL);
+			i++;
+			s += len;
 		}
 	}
-	return (words);
-}
-
-static char	**free_words(char **words, unsigned int i)
-{
-	while (i > 0)
-		free(words[--i]);
-	free(words);
-	return (NULL);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	char			**words;
-	unsigned int	nrwords;
-	unsigned int	pos;
-	unsigned int	sublen;
-	unsigned int	i;
-
-	nrwords = countwords(s, c, ft_strlen(s));
-	words = malloc((nrwords + 1) * sizeof(char *));
-	if (!words)
-		return (NULL);
-	pos = 0;
-	i = 0;
-	while (i < nrwords)
-	{
-		sublen = ft_substrlen(s, c, pos, ft_strlen(s));
-		words[i] = malloc(sublen + 1);
-		if (!words[i])
-			return (free_words(words, i));
-		pos = skipc(s, c, pos) + sublen;
-		ft_strlcpy(words[i], s + (pos - sublen), sublen + 1);
-		i++;
-	}
-	words[i] = NULL;
-	return (words);
+	arr[i] = NULL;
+	return (arr);
 }

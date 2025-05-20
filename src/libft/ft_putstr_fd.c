@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 13:15:12 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/12 17:02:42 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/12 19:13:32 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/12 19:45:53 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

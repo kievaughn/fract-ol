@@ -3,53 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:47:39 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/13 17:19:11 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/08 16:12:36 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/13 12:49:38 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static short int	checkset(const char s1, const char *set, size_t setsize)
+static int	is_in_set(char c, const char *set)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < setsize)
+	while (set[i])
 	{
-		if (s1 == set[i])
+		if (set[i] == c)
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
+static void	start_end(const char *s1, const char *set, int *start, int *end)
+{
+	*start = 0;
+	*end = ft_strlen((char *)s1) - 1;
+	while (s1[*start] && is_in_set(s1[*start], set))
+		(*start)++;
+	while (*end > *start && is_in_set(s1[*end], set))
+		(*end)--;
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*ret;
-	size_t	totalsize;
-	size_t	fw;
-	size_t	i;
+	char				*cpy;
+	unsigned long int	i;
+	int					start;
+	int					end;
 
-	totalsize = ft_strlen(s1);
-	fw = 0;
-	while (checkset(s1[fw], set, ft_strlen(set)) == 1)
-		fw++;
-	while (checkset(s1[totalsize - 1], set, ft_strlen(set)) == 1)
-		totalsize--;
-	if (fw >= totalsize)
+	i = 0;
+	if (!s1)
+		return (NULL);
+	if (!set)
+		return (ft_strdup((char *)s1));
+	start_end(s1, set, &start, &end);
+	if (s1[start] == '\0')
+		return (ft_strdup(""));
+	if (start > end)
 		return (ft_strdup("\0"));
-	ret = malloc((totalsize - fw) + 1);
-	if (!ret)
+	cpy = malloc(end - start + 2);
+	if (!cpy)
 		return (NULL);
 	i = 0;
-	while (i < (totalsize - fw))
-	{
-		ret[i] = s1[i + fw];
-		i++;
-	}
-	ret[i] = '\0';
-	return (ret);
+	while (start <= end)
+		cpy[i++] = s1[start++];
+	cpy[i] = '\0';
+	return (cpy);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimendon <dimendon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 12:47:02 by dimendon          #+#    #+#             */
-/*   Updated: 2024/11/13 18:33:37 by dimendon         ###   ########.fr       */
+/*   Created: 2024/11/14 16:14:05 by kbrandon          #+#    #+#             */
+/*   Updated: 2024/11/14 16:43:00 by kbrandon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*aux;
+	t_list	*last;
 
-	if (!*lst)
-		*lst = new;
-	else
+	if (*lst == NULL)
 	{
-		aux = *lst;
-		while (aux->next != NULL)
-			aux = aux->next;
-		aux->next = new;
+		*lst = new;
+		return ;
 	}
+	last = ft_lstlast(*lst);
+	if (!last)
+		*lst = new;
+	last->next = new;
 }

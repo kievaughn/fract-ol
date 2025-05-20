@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kievaughn <kievaughn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:55:15 by dimendon          #+#    #+#             */
-/*   Updated: 2025/05/16 15:03:04 by kbrandon         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:35:22 by kievaughn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ typedef struct s_complex
 	double	y;
 }			t_complex;
 
-/*
- * pixels buffer
- * values from mlx_get_data_addr()
- */
 typedef struct s_img
 {
 	void		*img_ptr;
@@ -72,7 +68,7 @@ typedef struct s_fractal
 }			t_fractal;
 
 double		atodbl(char *s);
-void		fractal_init(t_fractal *fractal);
+void		initialize_fractal(t_fractal *fractal);
 void		fractal_render(t_fractal *fractal);
 double		map(double unscaled_num, double new_min, double new_max,
 				double old_min);
@@ -82,8 +78,8 @@ int			key_handler(int keysym, t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
 //int			julia_track(int x, int y, t_fractal *fractal);
-void		events_init(t_fractal *fractal);
-void		data_init(t_fractal *fractal);
+void		setup_event_hooks(t_fractal *fractal);
+void		initialize_fractal_defaults(t_fractal *fractal);
 void		which_fractal(t_complex *z, t_complex *c, t_fractal *fractal);
 void		put_pixel(int x, int y, t_img *img, int color);
 

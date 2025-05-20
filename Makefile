@@ -9,9 +9,9 @@ LIBFT_DIR = src/libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 SRCS =	src/main.c \
-	src/calcs.c \
-	src/helper_inits.c \
-	src/render.c
+	src/complex_math.c \
+	src/events_and_input.c \
+	src/fractal_render.c
 		
 OBJS = $(SRCS:src/%.c=$(OBJ_PATH)%.o)
 HEADERS = includes/fractol.h

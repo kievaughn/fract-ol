@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kievaughn <kievaughn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:10:06 by kbrandon          #+#    #+#             */
-/*   Updated: 2025/05/16 15:10:09 by kbrandon         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:31:14 by kievaughn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ inline	void	fractal_render(t_fractal *fractal)
 		fractal->img.img_ptr, 0, 0);
 }
 
-void	data_init(t_fractal *fractal)
+void	initialize_fractal_defaults(t_fractal *fractal)
 {
 	fractal->escape_value = 4;
 	fractal->iterations_def = 42;

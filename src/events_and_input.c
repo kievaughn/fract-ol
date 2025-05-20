@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_inits.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kievaughn <kievaughn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:09:44 by kbrandon          #+#    #+#             */
-/*   Updated: 2025/05/16 15:10:29 by kbrandon         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:30:38 by kievaughn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 	return (0);
 }
 
-void	events_init(t_fractal *fractal)
+void	setup_event_hooks(t_fractal *fractal)
 {
 	mlx_hook(fractal->mlx_window, KeyPress, KeyPressMask, key_handler, fractal);
 	mlx_hook(fractal->mlx_window, ButtonPress, ButtonPressMask, mouse_handler,

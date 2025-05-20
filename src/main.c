@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbrandon <kbrandon@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: kievaughn <kievaughn@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:10:00 by kbrandon          #+#    #+#             */
-/*   Updated: 2025/05/16 15:10:32 by kbrandon         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:31:58 by kievaughn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error(char *message)
 	exit(EXIT_FAILURE);
 }
 
-static void	fractal_mlx_init_connection_window(t_fractal *fractal)
+static void	initialize_mlx_window(t_fractal *fractal)
 {
 	fractal->mlx_connection = mlx_init();
 	if (fractal->mlx_connection == NULL)
@@ -35,7 +35,7 @@ static void	fractal_mlx_init_connection_window(t_fractal *fractal)
 	}
 }
 
-static void	fractal_mlx_init_image_pixel(t_fractal *fractal)
+static void	initialize_mlx_image(t_fractal *fractal)
 {
 	fractal->img.img_ptr = mlx_new_image(fractal->mlx_connection, WIDTH,
 			HEIGHT);
@@ -50,12 +50,12 @@ static void	fractal_mlx_init_image_pixel(t_fractal *fractal)
 			&fractal->img.bpp, &fractal->img.line_len, &fractal->img.endian);
 }
 
-void	fractal_init(t_fractal *fractal)
+void	initialize_fractal(t_fractal *fractal)
 {
-	fractal_mlx_init_connection_window(fractal);
-	fractal_mlx_init_image_pixel(fractal);
-	events_init(fractal);
-	data_init(fractal);
+	initialize_mlx_window(fractal);
+	initialize_mlx_image(fractal);
+	setup_event_hooks(fractal);
+	initialize_fractal_defaults(fractal);
 }
 
 int	main(int ac, char **av)
@@ -71,7 +71,7 @@ int	main(int ac, char **av)
 			fractal.julia_x = atodbl(av[2]);
 			fractal.julia_y = atodbl(av[3]);
 		}
-		fractal_init(&fractal);
+		initialize_fractal(&fractal);
 		fractal_render(&fractal);
 		mlx_loop(fractal.mlx_connection);
 	}
